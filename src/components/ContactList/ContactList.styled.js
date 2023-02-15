@@ -8,6 +8,7 @@ export const StyledContactList = styled(Box).attrs({
 export const StyledContactListItem = styled.li`
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.colors.white};
 
   &:not(:first-child) {
     margin-top: ${({ theme }) => `${theme.space[2]}px`};

@@ -15,27 +15,27 @@ export const fetchContacts = createAsyncThunk(
 );
 
 export const addContact = createAsyncThunk(
-    'contacts/addContact',
-    async (contact, { rejectWithValue }) => {
-      try {
-        const { data } = await contactsAPI.addContact(contact);
-  
-        return data;
-      } catch (error) {
-        return rejectWithValue(error.message);
-      }
+  'contacts/addContact',
+  async (contact, { rejectWithValue }) => {
+    try {
+      const { data } = await contactsAPI.addContact(contact);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
+  }
 );
-  
+
 export const removeContact = createAsyncThunk(
-    'contacts/removeContact',
-    async (contactId, { rejectWithValue }) => {
-      try {
-        const { data } = await contactsAPI.removeContact(contactId);
-  
-        return data;
-      } catch (error) {
-        return rejectWithValue(error.message);
-      }
+  'contacts/removeContact',
+  async (contactId, { rejectWithValue }) => {
+    try {
+      const { data } = await contactsAPI.removeContact(contactId);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
+  }
 );

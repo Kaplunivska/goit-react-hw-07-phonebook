@@ -13,7 +13,7 @@ import {
 } from 'styled-system';
 
 export const Box = styled('div')(
-    compose(space, color, layout, flexbox, background, border, shadow)
+  compose(space, color, layout, flexbox, background, border, shadow)
 );
 
 Box.propTypes = {

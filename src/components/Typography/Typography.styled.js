@@ -8,7 +8,7 @@ export const MainHeader = styled.h1`
 
   font-size: ${({ theme }) => theme.fontSizes.h1};
   font-weight: ${({ theme }) => theme.fontWeights.heading};
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 MainHeader.propTypes = {

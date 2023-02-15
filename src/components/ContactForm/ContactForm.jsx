@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { object, string } from 'yup';
 import FormInput from 'components/FormInput';
 import { StyledFormButton, StyledForm } from './ContactForm.styled';
-import { addContact } from 'redux/contacts.slice';
+import { addContact } from 'redux/contacts/contacts.operations';
+import { selectContacts } from 'redux/contacts/contacts.selectors';
+import { Notification } from 'helpers';
 
 const initialValues = { name: '', number: '' };
 const inputs = [
@@ -45,10 +47,13 @@ const contactSchema = object({
 
 export default function ContactForm() {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isDirty, isValid, isSubmitting, touchedFields },
   } = useForm({
     // Для того щоб, перевірка поля відбувалася при зміні значення поля.
@@ -58,6 +63,17 @@ export default function ContactForm() {
   });
 
   const submitHandler = data => {
+    const findedContact = contacts.find(contact => contact.name.toLowerCase() === data.name.toLowerCase());
+
+    if (findedContact) {
+      Notification.warning(`${data.name} is already in contacts list!`);
+      setError('name', {
+        type: 'custom',
+        message: `This name is already in contacts list!`,
+      });
+      return;
+    }
+
     dispatch(addContact(data));
     reset();
   };
@@ -70,7 +86,7 @@ export default function ContactForm() {
           <FormInput
             key={name}
             {...otherProps}
-            {...register(name)}gi
+            {...register(name)}
             touched={touchedFields[name]}
             error={errors[name]}
           >

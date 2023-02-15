@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchStatus } from 'constants';
-
 import {
-  fetchStatus,
+  fetchContacts,
   addContact,
   removeContact,
 } from './contacts.operations';
@@ -42,14 +41,14 @@ const contacts = createSlice({
         })
 
         .addMatcher(
-          action => action.type.endWith('/pending'),
+          action => action.type.endsWith('/pending'),
           state => {
             state.status = fetchStatus.PENDING;
             state.error = null;
           }
         )
         .addMatcher(
-         action => action.type.endWith('/rejected'),
+         action => action.type.endsWith('/rejected'),
          (state, { payload }) => {
           state.status = fetchStatus.REJECTED;
           state.error = payload;

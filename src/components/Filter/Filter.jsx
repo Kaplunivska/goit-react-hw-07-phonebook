@@ -4,10 +4,11 @@ import {
   StyledFormLabel,
 } from 'components/FormInput/FormInput.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilter, updateFilter } from 'redux/contacts.slice';
+import { selectFilter } from 'redux/contacts/contacts.selectors';
+import { updateFilter } from 'redux/contacts/contacts.slice';
 
 export default function Filter() {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
   
   return (
