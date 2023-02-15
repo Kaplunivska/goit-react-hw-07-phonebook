@@ -10,7 +10,6 @@ import { updateFilter } from 'redux/contacts/contacts.slice';
 export default function Filter() {
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
-  
   return (
     <StyledForm>
       <StyledFormLabel>
@@ -20,7 +19,7 @@ export default function Filter() {
           name="filter"
           value={filter}
           onChange={evt => {
-            dispatch(updateFilter({ value: evt.target.value }));
+            dispatch(updateFilter(evt.target.value));
           }}
           placeholder="Search..."
         />
